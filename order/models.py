@@ -11,14 +11,14 @@ class Order(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     end_at = models.DateTimeField(null=True)
-    plated_end_at = models.DateTimeField()
+    plated_end_at = models.DateTimeField(null=True)
 
     def __str__(self):
         """
         Magic method is redefined to show all information about Book.
         :return: book id, book name, book description, book count, book authors
         """
-        return str(self.to_dict())[1:-1]
+        return str(self.name)
 
     def __repr__(self):
         """

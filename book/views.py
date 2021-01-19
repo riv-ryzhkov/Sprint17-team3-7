@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book, Author
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import admin
+from .forms import BookForm
 
 
 def all_books(request):
@@ -29,19 +30,23 @@ def test(request):
     return render(request, 'book/book_plus.html', {'title': "All books", "books": books})
 
 
-def book_update(request):
-    # def book_update(request, book_id=0, name, description, author, count):
-    # if name:
-    #     Book.objects.get(id=book_id).name = name
-    # if description:
-    #     Book.objects.get(id=book_id).description = description
-    # if author:
-    #     Book.objects.get(id=book_id).author = author
-    # if count:
-    #     Book.objects.get(id=book_id).count = count
-    # Book.save()
-    books = list(Book.objects.all())
-    return render(request, 'book/all_books.html', {'title': "All books", "books": books})
+def book_form(request, id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = BookForm()
+        else:
+            book = Book.objects.get(id=id)
+            form = BookForm(instance=book)
+        return render(request, 'book/book_form.html', {'form': form})
+    else:
+        if id == 0:
+            form = BookForm(request.POST)
+        else:
+            book = Book.objects.get(id=id)
+            form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+        return redirect('books')
 
 
 def book_delete(request, id=0):

@@ -19,6 +19,8 @@
       <th scope="col">created at</th>
       <th scope="col">end at</th>
       <th scope="col">plated at</th>
+        <th <div><a type="button" class="btn btn-success btn-sm" href="/order/0">+ Add New Order </a></div> </th>
+    <th></th>
     </tr>
   </thead>
   <tbody>
@@ -30,9 +32,9 @@
                     <td>{{el.book.name}}</td>
                     <td>{{el.created_at}}</td>
                     <td>{{el.end_at}}</td>
-                    <td>{{el.plated_at}}</td>
-                    <td><a type="button" class="btn btn-warning btn-sm" href="/order/{{ el.id }}">View</a>
-                    <a type="button" class="btn btn-warning btn-sm" href="/order/{{ el.id }}/update">Update</a>
+                    <td>{{el.plated_end_at}}</td>
+                    <td><a type="button" class="btn btn-info btn-sm" href="/order/{{ el.id }}/view">View</a>
+                    <a type="button" class="btn btn-warning btn-sm" href="/order/{{ el.id }}">Update</a>
                     <a type="button" class="btn btn-danger btn-sm" href="/order/{{ el.id }}/delete">Delete</a></td>
                   </tr>
              {% endfor %}

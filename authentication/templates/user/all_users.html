@@ -23,6 +23,8 @@
       <th scope="col">Created at</th>
       <th scope="col">Role</th>
       <th scope="col">is active</th>
+       <th <div><a type="button" class="btn btn-success btn-sm" href="/user/0">+ Add New User </a></div> </th>
+    <th></th>
     </tr>
   </thead>
   <tbody>
@@ -39,8 +41,8 @@
                     <td>{{el.created_at}}</td>
                     <td>{{el.role}}</td>
                     <td>{{el.is_active}}</td>
-                    <td><a type="button" class="btn btn-warning btn-sm" href="/user/{{ el.id }}">View</a>
-                      <a type="button" class="btn btn-warning btn-sm" href="/user/{{ el.id }}/update">Update</a>
+                    <td><a type="button" class="btn btn-info btn-sm" href="/user/{{ el.id }}/view">View</a>
+                      <a type="button" class="btn btn-warning btn-sm" href="/user/{{ el.id }}">Update</a>
                       <a type="button" class="btn btn-danger btn-sm" href="/user/{{ el.id }}/delete">Delete</a></td>
                   </tr>
              {% endfor %}

@@ -17,6 +17,8 @@
       <th scope="col">Name</th>
       <th scope="col">Surname</th>
       <th scope="col">Patronymic</th>
+        <th <div><a type="button" class="btn btn-success btn-sm" href="/author/0">+ Add New Author </a></div> </th>
+    <th></th>
     </tr>
   </thead>
   <tbody>
@@ -27,8 +29,8 @@
                     <td>{{el.name}}</td>
                     <td>{{el.surname}}</td>
                     <td>{{el.patronymic}}</td>
-                      <td><a type="button" class="btn btn-warning btn-sm" href="/author/{{ el.id }}">View</a>
-                      <a type="button" class="btn btn-warning btn-sm" href="/author/{{ el.id }}/update">Update</a>
+                      <td><a type="button" class="btn btn-info btn-sm" href="/author/{{ el.id }}/view">View</a>
+                      <a type="button" class="btn btn-warning btn-sm" href="/author/{{ el.id }}">Update</a>
                     <a type="button" class="btn btn-danger btn-sm" href="/author/{{ el.id }}/delete">Delete</a></td>
                   </tr>
              {% endfor %}
