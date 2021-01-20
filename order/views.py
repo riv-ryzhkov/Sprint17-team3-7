@@ -19,10 +19,11 @@ def order_form(request, id=0):
     if request.method == "GET":
         if id == 0:
             form = OrderForm()
+            return render(request, 'order/order_form_add.html', {'form': form})
         else:
             order = Order.objects.get(id=id)
             form = OrderForm(instance=order)
-        return render(request, 'order/order_form.html', {'form': form})
+            return render(request, 'order/order_form.html', {'form': form})
     else:
         if id == 0:
             form = OrderForm(request.POST)
