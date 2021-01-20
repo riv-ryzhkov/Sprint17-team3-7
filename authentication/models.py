@@ -1,8 +1,9 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
+from django.core.validators import validate_email, RegexValidator
 from django.db import models, IntegrityError
 from django.db.utils import DataError
+
 
 ROLE_CHOICES = (
     (0, 'visitor'),
@@ -36,9 +37,25 @@ class CustomUser(AbstractBaseUser):
 
     """
 
-    first_name = models.CharField(blank=True, max_length=20)
-    middle_name = models.CharField(blank=True, max_length=20)
-    last_name = models.CharField(blank=True, max_length=20)
+    first_name = models.CharField(blank=True, max_length=20, validators=[RegexValidator(
+            regex=r'^[a-zA-Z]*$',
+            message='Username must be Alphanumeric',
+            code='invalid_firstname'
+        ),
+    ])
+    middle_name = models.CharField(blank=True, max_length=20, validators=[
+        RegexValidator(
+            regex=r'^[a-zA-Z]*$',
+            message='Username must be Alphanumeric',
+            code='invalid_middle_name'
+        )
+    ])
+    last_name = models.CharField(blank=True, max_length=20, validators=[
+        RegexValidator(
+            regex=r'^[a-zA-Z]*$',
+            message='Username must be Alphanumeric',
+        )
+    ])
     email = models.EmailField(max_length=100, unique=True, validators=[validate_email])
     password = models.CharField(max_length=128)
     updated_at = models.DateTimeField(auto_now=True)
@@ -135,11 +152,14 @@ class CustomUser(AbstractBaseUser):
         user.set_password(password)
         try:
             validate_email(user.email)
+            RegexValidator(user.first_name)
+            RegexValidator(user.last_name)
+            RegexValidator(user.middle_name)
             user.save()
             return user
         except (IntegrityError, AttributeError, ValidationError, DataError):
             # LOGGER.error("Wrong attributes or relational integrity error")
-            pass
+            raise ValidationError
 
     def to_dict(self):
         """

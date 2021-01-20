@@ -15,6 +15,7 @@ def user_by_id(request, id=0):
     user_by_id = CustomUser.objects.get(id=id)
     return render(request, 'user/user_by_id.html', {'title': "User by id", "user_by_id": user_by_id})
 
+
 def user_form(request, id=0):
     if request.method == "GET":
         if id == 0:
@@ -30,8 +31,12 @@ def user_form(request, id=0):
             user = CustomUser.objects.get(id=id)
             form = UserForm(request.POST, instance=user)
         if form.is_valid():
+
             form.save()
+        else:
+            return render(request, 'user/user_form_error.html')
         return redirect('users')
+
 
 def user_update(request):
     # def book_update(request, book_id=0, name, description, author, count):
@@ -53,4 +58,3 @@ def user_delete(request, id=0):
     user.delete()
     users = list(CustomUser.objects.all())
     return render(request, 'user/all_users.html', {'title': "All users", "users": users})
-

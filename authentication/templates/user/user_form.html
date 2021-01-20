@@ -15,11 +15,11 @@ Users
         <div> <b>Last name  : </b>{{form.last_name}}</div><br>
         <div> <b>Email : </b><div> {{form.email}}</div><br>
         <div> <b>Password : </b><div> {{form.password}}</div><br>
-        <div> <b>Created at : </b><div> {{form.created_at}}</div><br>
-        <div> <b>Updated at : </b><div> {{form.updated_at}}</div><br>
         <div> <b>Role : </b><div> {{form.role}}</div><br>
         <div> <b>Is active : </b><div> {{form.is_active}}</div><br>
-        <input type="submit" value="Submit" class="btn btn-success btn-sm">
+        <input type="submit" value="Submit" class="btn btn-success btn-sm" oninvalid="">
     </form>
 
+
 {% endblock %}
+

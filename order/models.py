@@ -18,7 +18,7 @@ class Order(models.Model):
         Magic method is redefined to show all information about Book.
         :return: book id, book name, book description, book count, book authors
         """
-        return str(self.name)
+        return str(self.book_id), str(self.book.name), str(self.book.description), str(self.book.count), str(self.book.authors)
 
     def __repr__(self):
         """
@@ -42,8 +42,8 @@ class Order(models.Model):
     def create(user, book, plated_end_at):
 
         order = Order(user=user, book=book, plated_end_at=plated_end_at)
-        if book.count <= len([order for order in Order.get_not_returned_books() if order.book.id == book.id]):
-            return
+        # if book.count <= len([order for order in Order.get_not_returned_books() if order.book.id == book.id]):
+        #     return
         try:
             order.save()
             return order
